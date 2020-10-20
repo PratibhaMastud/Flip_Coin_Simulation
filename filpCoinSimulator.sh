@@ -1,31 +1,44 @@
 #! /bin/bash
 #Author:PratibhaMastud
-#1.Check how many times head or tails win by flipping 10 times.
+#1.Check the winner with 21 score by flipping the coin.
 
-#variable initialization
-times=10
-i=0
+i=1
 head=0
 tail=0
+var1=1
+var2=0
 
-while [ $i -lt $times ]
-do
-        flip=$((RANDOM%2))
-
-        if [ $flip -eq 1 ]
+flip=$((RANDOM%2))
+while [ $i -gt 0 ]
+do        
+        
+	if [ $flip -eq $var1 ]
         then
-                head=$(($head+1))
-        else
-                tail=$(($tail+1))
+		# we are going to check head is score is egual to given score 
+		  head=$(($head + 1))
+
+		if [ $head -eq 21 ]
+                then
+                        echo "Winner is Head with $head score"
+                        break
+			
+		fi
+
+	elif [ $flip -eq $var2 ]
+	then	
+		                
+		tail=$(($tail+1))
+		
+		if [ $tail -eq 21 ]
+                then
+			echo "Winner is Tail with $tail score"
+                        break
+                fi	
+		      
+		
         fi
 
         i=$(($i+1))
 done
-# we are going to check who is win by comparing the score
-if [ $head -gt $tail ]
-        then
-                echo "Winner is Head with $head Numbers"
-        else
-                echo "Winner is Tail with $tail Numbers"
-fi
+
 
