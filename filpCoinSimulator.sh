@@ -1,43 +1,52 @@
 #! /bin/bash
 #Author:PratibhaMastud
-#1.Check the winner with 21 score by flipping the coin.
-
+#1.find the Head and Tail score is same the match tied it continue till difference of two is achieved
 i=1
 head=0
 tail=0
-var1=1
-var2=0
 
-flip=$((RANDOM%2))
-while [ $i -gt 0 ]
+
+
+while [ $i -le 30 ]
 do        
+	flip=$((RANDOM%2))
         
-	if [ $flip -eq $var1 ]
+	echo "flip=$flip"
+	if [ $flip -eq 1 ]
         then
-		# we are going to check head is score is egual to given score 
-		  head=$(($head + 1))
+		  
+		head=$(($head + 1))
+		echo "head=$head"
+	else
+		tail=$(($tail +1))
+		echo "tail=$tail"
 
-		if [ $head -eq 21 ]
-                then
-                        echo "Winner is Head with $head score"
-                        break
-			
-		fi
+	fi
 
-	elif [ $flip -eq $var2 ]
+	if [ $head -gt $tail ]
 	then	
 		                
-		tail=$(($tail+1))
-		
-		if [ $tail -eq 21 ]
-                then
-			echo "Winner is Tail with $tail score"
-                        break
-                fi	
-		      
-		
-        fi
+		diff=$(($head-$tail))
+	else
+		diff=$(($tail-$head))
+	fi
 
+	
+	if [ $diff -gt 2 ]
+        then
+		echo "Difference ($head-$tail)=" $diff
+	   	echo "The difference of score is achieved minimum 2 points,Stop the game"
+		echo "Succesful Win"
+        	i=$(($i-$i))                
+		break
+
+	 elif [ $head -eq $tail ]
+	 then 
+		echo "score ($head = $tail)"
+		echo "The Head and Tail score is same the match tied but it continue till difference of two is achieved."
+		
+         fi	
+		     
         i=$(($i+1))
 done
 
